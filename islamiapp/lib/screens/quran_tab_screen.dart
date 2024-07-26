@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:islamiapp/reusable_widgets/helper_methods.dart';
-import 'package:islamiapp/screens/quran_surat_screen.dart';
+import 'package:islamiapp/screens/surat_content_screen.dart';
 
-class QuranTabScreen extends StatelessWidget {
+class QuranTabScreen extends StatefulWidget {
   const QuranTabScreen({super.key});
   static const String routeName = "Quran_tab_screen";
   static const primaryColor = Color(0xffB7935F);
@@ -243,6 +243,12 @@ class QuranTabScreen extends StatelessWidget {
   ];
 
   @override
+  State<QuranTabScreen> createState() => _QuranTabScreenState();
+}
+
+class _QuranTabScreenState extends State<QuranTabScreen> {
+  int selectedItemIndex = 0;
+  @override
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
@@ -251,17 +257,32 @@ class QuranTabScreen extends StatelessWidget {
           backgroundColor: Colors.transparent,
           appBar: AppBar(
             title: const Text(
-              "Islami",
-              style: TextStyle(fontSize: 30),
+              "القرآن الكريم",
+              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
             ),
             centerTitle: true,
             backgroundColor: Colors.transparent,
+            shadowColor: Colors.transparent,
+            automaticallyImplyLeading: false,
           ),
           bottomNavigationBar: Theme(
             data: ThemeData(
               canvasColor: const Color(0xffB7935F),
             ),
             child: BottomNavigationBar(
+              currentIndex: selectedItemIndex,
+              onTap: (index) {
+                setState(() {
+                  if (selectedItemIndex != index) {
+                    selectedItemIndex = index;
+                    Navigator.pushNamed(
+                      context,
+                      HelperMethodsAndAttributes.navbarItemToRourtName[index]
+                          .toString(),
+                    );
+                  }
+                });
+              },
               selectedItemColor: const Color(0xff242424),
               items: const [
                 BottomNavigationBarItem(
@@ -270,25 +291,25 @@ class QuranTabScreen extends StatelessWidget {
                           "assets/images/quran_tab_images/quran_icon.png"),
                       size: 62,
                     ),
-                    label: "Quran"),
+                    label: "القرآن"),
                 BottomNavigationBarItem(
                     icon: ImageIcon(
                       AssetImage("assets/images/quran_tab_images/sebha.png"),
                       size: 62,
                     ),
-                    label: "Sebha"),
+                    label: "السبحة"),
                 BottomNavigationBarItem(
                     icon: ImageIcon(
                       AssetImage("assets/images/quran_tab_images/hadieth.png"),
                       size: 62,
                     ),
-                    label: "Hadieth"),
+                    label: "الحديث"),
                 BottomNavigationBarItem(
                     icon: ImageIcon(
                       AssetImage("assets/images/quran_tab_images/radio.png"),
                       size: 62,
                     ),
-                    label: "Radio"),
+                    label: "الراديو"),
               ],
             ),
           ),
@@ -310,15 +331,26 @@ class QuranTabScreen extends StatelessWidget {
                       child: Column(
                         children: [
                           const Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              Text(
-                                "verses count",
-                                style: TextStyle(fontSize: 30),
+                              SizedBox(
+                                width: 2,
                               ),
                               Text(
-                                "Sura name",
-                                style: TextStyle(fontSize: 30),
+                                "عدد الآيات",
+                                style: TextStyle(
+                                    fontSize: 30, fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(
+                                width: 15,
+                              ),
+                              Text(
+                                "اسم السورة",
+                                style: TextStyle(
+                                    fontSize: 30, fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(
+                                width: 2,
                               ),
                             ],
                           ),
@@ -328,7 +360,7 @@ class QuranTabScreen extends StatelessWidget {
                           Expanded(
                             child: ListView.builder(
                               shrinkWrap: true,
-                              itemCount: suraNames.length,
+                              itemCount: QuranTabScreen.suraNames.length,
                               itemBuilder: (context, int index) {
                                 return Container(
                                   margin: const EdgeInsets.all(10),
@@ -351,8 +383,11 @@ class QuranTabScreen extends StatelessWidget {
                                           padding:
                                               const EdgeInsets.only(left: 40),
                                           child: Text(
-                                            HelperMethods.convertToArabicNumber(
-                                                versesNumber[index].toString()),
+                                            HelperMethodsAndAttributes
+                                                .convertToArabicNumber(
+                                                    QuranTabScreen
+                                                        .versesNumber[index]
+                                                        .toString()),
                                             style:
                                                 const TextStyle(fontSize: 30),
                                           ),
@@ -361,7 +396,7 @@ class QuranTabScreen extends StatelessWidget {
                                           padding:
                                               const EdgeInsets.only(right: 40),
                                           child: Text(
-                                            suraNames[index],
+                                            QuranTabScreen.suraNames[index],
                                             style: GoogleFonts.amiriQuran(
                                               fontSize: 26,
                                             ),
@@ -380,19 +415,19 @@ class QuranTabScreen extends StatelessWidget {
                     const Divider(
                       indent: 2,
                       thickness: 3,
-                      color: primaryColor,
+                      color: QuranTabScreen.primaryColor,
                       height: 130,
                     ),
                     const Divider(
                       indent: 2,
                       thickness: 3,
-                      color: primaryColor,
+                      color: QuranTabScreen.primaryColor,
                       // height: 70,
                     ),
                     const Center(
                       child: VerticalDivider(
                         thickness: 3,
-                        color: primaryColor,
+                        color: QuranTabScreen.primaryColor,
                         indent: 7,
                       ),
                     ),
