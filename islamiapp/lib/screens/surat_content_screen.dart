@@ -31,7 +31,8 @@ class _QuranSuratScreenState extends State<QuranSuratScreen> {
       String temp = outputList[verseindex];
       temp = temp.trim();
       String arabicVerseIndex =
-          HelperMethods.convertToArabicNumber((verseindex + 1).toString());
+          HelperMethodsAndAttributes.convertToArabicNumber(
+              (verseindex + 1).toString());
       temp += " {$arabicVerseIndex}";
       // temp = temp.replaceAll("\n", "");
       suratContent.add(temp);
@@ -39,16 +40,6 @@ class _QuranSuratScreenState extends State<QuranSuratScreen> {
 
     setState(() {});
   }
-
-  // String convertToArabicNumber(String number) {
-  //   String res = '';
-
-  //   final arabics = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
-  //   for (var element in number.characters) {
-  //     res += arabics[int.parse(element)];
-  //   }
-  //   return res;
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -67,6 +58,8 @@ class _QuranSuratScreenState extends State<QuranSuratScreen> {
           ),
           centerTitle: true,
           backgroundColor: Colors.transparent,
+          // toolbarOpacity: 0,
+          // toolbarHeight: -20,
         ),
         body: Column(
           children: [
