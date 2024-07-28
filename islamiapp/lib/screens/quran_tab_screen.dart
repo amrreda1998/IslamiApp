@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:islamiapp/reusable_widgets/helper_methods.dart';
-import 'package:islamiapp/screens/surat_content_screen.dart';
+import 'package:islamiapp/reusable_widgets/helper_methods_and_attributes.dart';
+import 'package:islamiapp/screens/quran_sura_content_screen.dart';
 
 class QuranTabScreen extends StatefulWidget {
   const QuranTabScreen({super.key});
@@ -252,7 +252,11 @@ class _QuranTabScreenState extends State<QuranTabScreen> {
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        Image.asset("assets/images/background_image.png"),
+        Image.asset(
+          "assets/images/background_image.png",
+          fit: BoxFit.fill,
+          width: double.infinity,
+        ),
         Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
@@ -434,7 +438,7 @@ class _QuranTabScreenState extends State<QuranTabScreen> {
                   ],
                 ),
               )
-
+          
               // const Text("Sura Name"),
             ],
           ),

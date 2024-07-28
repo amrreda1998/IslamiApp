@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:google_fonts/google_fonts.dart';
-import 'package:islamiapp/reusable_widgets/helper_methods.dart';
+import 'package:islamiapp/reusable_widgets/helper_methods_and_attributes.dart';
 import 'package:islamiapp/screens/quran_tab_screen.dart';
 
 class QuranSuratScreen extends StatefulWidget {

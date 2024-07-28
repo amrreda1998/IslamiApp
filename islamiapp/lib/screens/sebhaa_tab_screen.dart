@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
-import 'package:islamiapp/reusable_widgets/helper_methods.dart';
+import 'package:islamiapp/reusable_widgets/helper_methods_and_attributes.dart';
 import 'package:islamiapp/screens/quran_tab_screen.dart';
 
 class SebhaaTabScreen extends StatefulWidget {
@@ -144,7 +144,7 @@ class _SebhaaTabScreenState extends State<SebhaaTabScreen> {
                     margin: const EdgeInsets.all(10),
                     child: Center(
                       child: Text(
-                        tasbehatCount.toString(),
+                        HelperMethodsAndAttributes.convertToArabicNumber(tasbehatCount.toString()),
                         style: GoogleFonts.elMessiri(fontSize: 28),
                       ),
                     ),
