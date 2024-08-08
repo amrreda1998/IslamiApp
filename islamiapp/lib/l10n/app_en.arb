@@ -1,0 +1,19 @@
+{
+    "app_title":"Islami",
+    "sura_name":"Sura Name",
+    "ayat_count":"Ayat Count",
+    "quran":"Quran",
+    "hadieth":"Hadieth",
+    "sebha":"Sebha",
+    "tasbehatCount":"Tasbehat count :",
+    "radio":"Radio",
+    "hadieth_name":"Hadieth Name",
+    "quran_kareem_radio":"Quran Kareem Broadcasting",
+    "settings" : "Settings",
+    "choose_app_language":"Choose The App language",
+    "choose_app_theme":"Choose The App Theme",
+    "light_theme":"Light Theme",
+    "dark_theme":"Dark Theme",
+    "arabic_language":"Arabic",
+    "english_language":"English"
+} 

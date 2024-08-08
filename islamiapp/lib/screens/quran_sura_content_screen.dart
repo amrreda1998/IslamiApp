@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:google_fonts/google_fonts.dart';
-import 'package:islamiapp/reusable_widgets/helper_methods.dart';
+import 'package:islamiapp/Themes/mythemedata.dart';
+import 'package:islamiapp/reusable_widgets/helper_methods_and_attributes.dart';
 import 'package:islamiapp/screens/quran_tab_screen.dart';
+// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class QuranSuratScreen extends StatefulWidget {
   static int suratFileIndex = 1;
@@ -48,7 +50,7 @@ class _QuranSuratScreenState extends State<QuranSuratScreen> {
     }
 
     return Stack(children: <Widget>[
-      Image.asset("assets/images/background_image.png"),
+      MyThemeData.appbackgroundimage,
       Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
