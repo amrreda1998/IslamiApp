@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:islamiapp/Themes/mythemedata.dart';
 import 'package:islamiapp/reusable_widgets/helper_methods_and_attributes.dart';
 import 'package:islamiapp/screens/quran_tab_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SebhaaTabScreen extends StatefulWidget {
   const SebhaaTabScreen({super.key});
@@ -29,13 +31,13 @@ class _SebhaaTabScreenState extends State<SebhaaTabScreen> {
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        Image.asset("assets/images/background_image.png"),
+        MyThemeData.appbackgroundimage,
         Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: const Text(
-              "السبحة",
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+            title: Text(
+              AppLocalizations.of(context)!.sebha,
+              style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
             ),
             centerTitle: true,
             backgroundColor: Colors.transparent,
@@ -43,8 +45,8 @@ class _SebhaaTabScreenState extends State<SebhaaTabScreen> {
             automaticallyImplyLeading: false,
           ),
           bottomNavigationBar: Theme(
-            data: ThemeData(
-              canvasColor: const Color(0xffB7935F),
+            data: Theme.of(context).copyWith(
+              canvasColor: Theme.of(context).primaryColor,
             ),
             child: BottomNavigationBar(
               currentIndex: selectedItemIndex,
@@ -60,33 +62,39 @@ class _SebhaaTabScreenState extends State<SebhaaTabScreen> {
                   }
                 });
               },
-              selectedItemColor: const Color(0xff242424),
-              items: const [
+              items: [
                 BottomNavigationBarItem(
-                    icon: ImageIcon(
+                    icon: const ImageIcon(
                       AssetImage(
                           "assets/images/quran_tab_images/quran_icon.png"),
                       size: 62,
                     ),
-                    label: "القرآن"),
+                    label: AppLocalizations.of(context)!.quran),
                 BottomNavigationBarItem(
-                    icon: ImageIcon(
+                    icon: const ImageIcon(
                       AssetImage("assets/images/quran_tab_images/sebha.png"),
                       size: 62,
                     ),
-                    label: "السبحة"),
+                    label: AppLocalizations.of(context)!.sebha),
                 BottomNavigationBarItem(
-                    icon: ImageIcon(
+                    icon: const ImageIcon(
                       AssetImage("assets/images/quran_tab_images/hadieth.png"),
                       size: 62,
                     ),
-                    label: "الحديث"),
+                    label: AppLocalizations.of(context)!.hadieth),
                 BottomNavigationBarItem(
-                    icon: ImageIcon(
+                    icon: const ImageIcon(
                       AssetImage("assets/images/quran_tab_images/radio.png"),
                       size: 62,
                     ),
-                    label: "الراديو"),
+                    label: AppLocalizations.of(context)!.radio),
+                BottomNavigationBarItem(
+                  icon: const Icon(
+                    Icons.settings,
+                    size: 40,
+                  ),
+                  label: AppLocalizations.of(context)!.settings,
+                ),
               ],
             ),
           ),
@@ -135,21 +143,6 @@ class _SebhaaTabScreenState extends State<SebhaaTabScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(30)),
-                      color: QuranTabScreen.primaryColor,
-                    ),
-                    width: 80,
-                    height: 80,
-                    margin: const EdgeInsets.all(10),
-                    child: Center(
-                      child: Text(
-                        HelperMethodsAndAttributes.convertToArabicNumber(tasbehatCount.toString()),
-                        style: GoogleFonts.elMessiri(fontSize: 28),
-                      ),
-                    ),
-                  ),
-                  Container(
                     //tasehat counter label
 
                     decoration: const BoxDecoration(
@@ -159,8 +152,24 @@ class _SebhaaTabScreenState extends State<SebhaaTabScreen> {
                     margin: const EdgeInsets.all(10),
                     padding: const EdgeInsets.all(20),
                     child: Text(
-                      " : عدد التسبيحات",
+                      AppLocalizations.of(context)!.tasbehatCount,
                       style: GoogleFonts.elMessiri(fontSize: 30),
+                    ),
+                  ),
+                  Container(
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(30)),
+                      color: QuranTabScreen.primaryColor,
+                    ),
+                    width: 80,
+                    height: 80,
+                    margin: const EdgeInsets.all(10),
+                    child: Center(
+                      child: Text(
+                        HelperMethodsAndAttributes.convertToArabicNumber(
+                            tasbehatCount.toString()),
+                        style: GoogleFonts.elMessiri(fontSize: 28),
+                      ),
                     ),
                   ),
                 ],

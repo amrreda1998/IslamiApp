@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:islamiapp/Themes/mythemedata.dart';
 import 'package:islamiapp/reusable_widgets/helper_methods_and_attributes.dart';
+// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HadiethContentScreen extends StatefulWidget {
   static int hadiethindex = 0;
@@ -18,7 +20,7 @@ class _HadiethContentScreen extends State<HadiethContentScreen> {
   @override
   Widget build(BuildContext context) {
     return Stack(children: <Widget>[
-      Image.asset("assets/images/background_image.png"),
+     MyThemeData.appbackgroundimage,
       Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:islamiapp/Themes/mythemedata.dart';
 import 'package:islamiapp/reusable_widgets/helper_methods_and_attributes.dart';
 import 'package:islamiapp/screens/quran_sura_content_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class QuranTabScreen extends StatefulWidget {
   const QuranTabScreen({super.key});
@@ -252,17 +254,13 @@ class _QuranTabScreenState extends State<QuranTabScreen> {
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        Image.asset(
-          "assets/images/background_image.png",
-          fit: BoxFit.fill,
-          width: double.infinity,
-        ),
+        MyThemeData.appbackgroundimage,
         Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: const Text(
-              "القرآن الكريم",
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+            title: Text(
+              AppLocalizations.of(context)!.quran,
+              style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
             ),
             centerTitle: true,
             backgroundColor: Colors.transparent,
@@ -270,8 +268,8 @@ class _QuranTabScreenState extends State<QuranTabScreen> {
             automaticallyImplyLeading: false,
           ),
           bottomNavigationBar: Theme(
-            data: ThemeData(
-              canvasColor: const Color(0xffB7935F),
+            data: Theme.of(context).copyWith(
+              canvasColor: Theme.of(context).primaryColor,
             ),
             child: BottomNavigationBar(
               currentIndex: selectedItemIndex,
@@ -287,33 +285,39 @@ class _QuranTabScreenState extends State<QuranTabScreen> {
                   }
                 });
               },
-              selectedItemColor: const Color(0xff242424),
-              items: const [
+              items: [
                 BottomNavigationBarItem(
-                    icon: ImageIcon(
+                    icon: const ImageIcon(
                       AssetImage(
                           "assets/images/quran_tab_images/quran_icon.png"),
                       size: 62,
                     ),
-                    label: "القرآن"),
+                    label: AppLocalizations.of(context)!.quran),
                 BottomNavigationBarItem(
-                    icon: ImageIcon(
+                    icon: const ImageIcon(
                       AssetImage("assets/images/quran_tab_images/sebha.png"),
                       size: 62,
                     ),
-                    label: "السبحة"),
+                    label: AppLocalizations.of(context)!.sebha),
                 BottomNavigationBarItem(
-                    icon: ImageIcon(
+                    icon: const ImageIcon(
                       AssetImage("assets/images/quran_tab_images/hadieth.png"),
                       size: 62,
                     ),
-                    label: "الحديث"),
+                    label: AppLocalizations.of(context)!.hadieth),
                 BottomNavigationBarItem(
-                    icon: ImageIcon(
+                    icon: const ImageIcon(
                       AssetImage("assets/images/quran_tab_images/radio.png"),
                       size: 62,
                     ),
-                    label: "الراديو"),
+                    label: AppLocalizations.of(context)!.radio),
+                BottomNavigationBarItem(
+                  icon: const Icon(
+                    Icons.settings,
+                    size: 40,
+                  ),
+                  label: AppLocalizations.of(context)!.settings,
+                ),
               ],
             ),
           ),
@@ -334,26 +338,26 @@ class _QuranTabScreenState extends State<QuranTabScreen> {
                       margin: const EdgeInsets.all(10),
                       child: Column(
                         children: [
-                          const Row(
+                          Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              SizedBox(
+                              const SizedBox(
                                 width: 2,
                               ),
                               Text(
-                                "عدد الآيات",
-                                style: TextStyle(
+                                AppLocalizations.of(context)!.sura_name,
+                                style: const TextStyle(
                                     fontSize: 30, fontWeight: FontWeight.bold),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 15,
                               ),
                               Text(
-                                "اسم السورة",
-                                style: TextStyle(
+                                AppLocalizations.of(context)!.ayat_count,
+                                style: const TextStyle(
                                     fontSize: 30, fontWeight: FontWeight.bold),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 2,
                               ),
                             ],
@@ -384,8 +388,18 @@ class _QuranTabScreenState extends State<QuranTabScreen> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 40),
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 40),
+                                          child: Text(
+                                            QuranTabScreen.suraNames[index],
+                                            style: GoogleFonts.amiriQuran(
+                                              fontSize: 26,
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 40),
                                           child: Text(
                                             HelperMethodsAndAttributes
                                                 .convertToArabicNumber(
@@ -394,16 +408,6 @@ class _QuranTabScreenState extends State<QuranTabScreen> {
                                                         .toString()),
                                             style:
                                                 const TextStyle(fontSize: 30),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(right: 40),
-                                          child: Text(
-                                            QuranTabScreen.suraNames[index],
-                                            style: GoogleFonts.amiriQuran(
-                                              fontSize: 26,
-                                            ),
                                           ),
                                         ),
                                       ],
@@ -438,7 +442,7 @@ class _QuranTabScreenState extends State<QuranTabScreen> {
                   ],
                 ),
               )
-          
+
               // const Text("Sura Name"),
             ],
           ),

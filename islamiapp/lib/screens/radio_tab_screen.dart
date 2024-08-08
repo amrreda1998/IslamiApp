@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:islamiapp/Themes/mythemedata.dart';
 import 'package:islamiapp/reusable_widgets/helper_methods_and_attributes.dart';
 // import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RadioTabScreen extends StatefulWidget {
   const RadioTabScreen({super.key});
@@ -48,13 +50,13 @@ class _RadioTabScreenState extends State<RadioTabScreen> {
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        Image.asset("assets/images/background_image.png"),
+        MyThemeData.appbackgroundimage,
         Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: const Text(
-              "الراديو",
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+            title: Text(
+              AppLocalizations.of(context)!.radio,
+              style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
             ),
             centerTitle: true,
             backgroundColor: Colors.transparent,
@@ -62,8 +64,8 @@ class _RadioTabScreenState extends State<RadioTabScreen> {
             automaticallyImplyLeading: false,
           ),
           bottomNavigationBar: Theme(
-            data: ThemeData(
-              canvasColor: const Color(0xffB7935F),
+            data: Theme.of(context).copyWith(
+              canvasColor: Theme.of(context).primaryColor,
             ),
             child: BottomNavigationBar(
               currentIndex: selectedItemIndex,
@@ -79,33 +81,39 @@ class _RadioTabScreenState extends State<RadioTabScreen> {
                   }
                 });
               },
-              selectedItemColor: const Color(0xff242424),
-              items: const [
+              items: [
                 BottomNavigationBarItem(
-                    icon: ImageIcon(
+                    icon: const ImageIcon(
                       AssetImage(
                           "assets/images/quran_tab_images/quran_icon.png"),
                       size: 62,
                     ),
-                    label: "القرآن"),
+                    label: AppLocalizations.of(context)!.quran),
                 BottomNavigationBarItem(
-                    icon: ImageIcon(
+                    icon: const ImageIcon(
                       AssetImage("assets/images/quran_tab_images/sebha.png"),
                       size: 62,
                     ),
-                    label: "السبحة"),
+                    label: AppLocalizations.of(context)!.sebha),
                 BottomNavigationBarItem(
-                    icon: ImageIcon(
+                    icon: const ImageIcon(
                       AssetImage("assets/images/quran_tab_images/hadieth.png"),
                       size: 62,
                     ),
-                    label: "الحديث"),
+                    label: AppLocalizations.of(context)!.hadieth),
                 BottomNavigationBarItem(
-                    icon: ImageIcon(
+                    icon: const ImageIcon(
                       AssetImage("assets/images/quran_tab_images/radio.png"),
                       size: 62,
                     ),
-                    label: "الراديو"),
+                    label: AppLocalizations.of(context)!.radio),
+                BottomNavigationBarItem(
+                  icon: const Icon(
+                    Icons.settings,
+                    size: 40,
+                  ),
+                  label: AppLocalizations.of(context)!.settings,
+                ),
               ],
             ),
           ),
@@ -121,13 +129,14 @@ class _RadioTabScreenState extends State<RadioTabScreen> {
               Padding(
                 padding: const EdgeInsets.only(top: 60),
                 child: Text(
-                  "إذاعة القرآن الكريم",
+                  AppLocalizations.of(context)!.quran_kareem_radio,
                   style: GoogleFonts.elMessiri(fontSize: 30),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 30),
                 child: Row(
+                  textDirection: TextDirection.ltr,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     IconButton(

@@ -4,6 +4,7 @@ import 'package:islamiapp/screens/ahadieth_tab_screen.dart';
 import 'package:islamiapp/screens/quran_tab_screen.dart';
 import 'package:islamiapp/screens/radio_tab_screen.dart';
 import 'package:islamiapp/screens/sebhaa_tab_screen.dart';
+import 'package:islamiapp/screens/settings_tab_screen.dart';
 
 class HelperMethodsAndAttributes {
   //method to convert numbers in a string to its arabic fomat
@@ -22,6 +23,7 @@ class HelperMethodsAndAttributes {
     1: SebhaaTabScreen.routeName,
     2: AhadiethTabScreen.routeName,
     3: RadioTabScreen.routeName,
+    4: SettingsTabScreen.routeName,
   };
 
   //method to form a title for every hadieth in the list
