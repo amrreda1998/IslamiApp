@@ -8,13 +8,25 @@ import 'package:islamiapp/reusable_widgets/helper_methods_and_attributes.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsTabScreen extends StatefulWidget {
   const SettingsTabScreen({super.key});
   static const String routeName = "Settings_tab_screen"; // route name
   static const primaryColor = Color(0xffB7935F);
-  static   String? choosenTheme = "Light Theme";
-  static   String? choosenlanguage = "English";
+
+  static String? choosenTheme = "Light Theme";
+  static String? choosenlanguage = "English";
+
+  static setBackgoroundImage(AppConfigProvider provider) {
+    if (provider.isDark()) {
+      MyThemeData.appbackgroundimage =
+          Image.asset("assets/images/background_image_dark.png");
+    } else {
+      MyThemeData.appbackgroundimage =
+          Image.asset("assets/images/background_image.png");
+    }
+  }
 
   @override
   State<SettingsTabScreen> createState() => _SettingsTabScreen();
@@ -53,10 +65,13 @@ class _SettingsTabScreen extends State<SettingsTabScreen> {
     return item;
   }
 
+  setChoosenTheme() {}
+
   @override
   Widget build(BuildContext context) {
     var provider = Provider.of<AppConfigProvider>(context);
-    // setnavBarthemeTolight(SettingsTabScreen.choosenTheme);
+    SettingsTabScreen.setBackgoroundImage(provider);
+
     return Stack(
       children: <Widget>[
         MyThemeData.appbackgroundimage,
@@ -90,7 +105,6 @@ class _SettingsTabScreen extends State<SettingsTabScreen> {
                   }
                 });
               },
-
               items: [
                 BottomNavigationBarItem(
                     icon: const ImageIcon(
@@ -166,14 +180,32 @@ class _SettingsTabScreen extends State<SettingsTabScreen> {
                         .toList(),
                     value: SettingsTabScreen.choosenlanguage,
                     onChanged: (String? value) {
-                      if (value == "Arabic" || value == "العربية") {
-                        provider.changeLanguage("ar");
-                      } else if (value == "English" || value == "الإنجليزية") {
-                        provider.changeLanguage("en");
-                      }
                       setState(() {
                         SettingsTabScreen.choosenlanguage = value;
                       });
+                      if (value == "Arabic" || value == "العربية") {
+                        provider.changeLanguage("ar");
+                        //saving app language
+                        () async {
+                          SharedPreferences sharedPreferences =
+                              await SharedPreferences.getInstance();
+                          sharedPreferences.setString(
+                              "lastUsedProviderlanguage", provider.appLanguage);
+                          sharedPreferences.setString(
+                              "lastChoosenlanguage", value!);
+                        }();
+                      } else if (value == "English" || value == "الإنجليزية") {
+                        provider.changeLanguage("en");
+                        //saving app language
+                        () async {
+                          SharedPreferences sharedPreferences =
+                              await SharedPreferences.getInstance();
+                          sharedPreferences.setString(
+                              "lastUsedProviderlanguage", provider.appLanguage);
+                          sharedPreferences.setString(
+                              "lastChoosenlanguage", value!);
+                        }();
+                      }
                     },
                     buttonStyleData: const ButtonStyleData(
                       padding: EdgeInsets.symmetric(horizontal: 16),
@@ -218,16 +250,38 @@ class _SettingsTabScreen extends State<SettingsTabScreen> {
                     value: SettingsTabScreen.choosenTheme,
                     onChanged: (String? value) {
                       setState(() {
+                        SettingsTabScreen.choosenTheme = value;
                         if (value == "Light Theme" ||
                             value == "الوضع النهارى") {
                           provider.changeTheme(ThemeMode.light);
-                          MyThemeData.appbackgroundimage = Image.asset("assets/images/background_image.png");
+                          MyThemeData.appbackgroundimage =
+                              Image.asset("assets/images/background_image.png");
+
+                          // saving prefrences
+                          () async {
+                            SharedPreferences sharedPreferences =
+                                await SharedPreferences.getInstance();
+                            sharedPreferences.setBool(
+                                "lastUsedthememode", true);
+                            sharedPreferences.setString(
+                                "lastChoosenTheme", value!);
+                          }();
                         } else if (value == "Dark Theme" ||
                             value == "الوضع الليلى") {
                           provider.changeTheme(ThemeMode.dark);
-                          MyThemeData.appbackgroundimage = Image.asset("assets/images/background_image_dark.png");
+                          MyThemeData.appbackgroundimage = Image.asset(
+                              "assets/images/background_image_dark.png");
+
+                          // saving prefrences
+                          () async {
+                            SharedPreferences sharedPreferences =
+                                await SharedPreferences.getInstance();
+                            sharedPreferences.setBool(
+                                "lastUsedthememode", false);
+                            sharedPreferences.setString(
+                                "lastChoosenTheme", value!);
+                          }();
                         }
-                        SettingsTabScreen.choosenTheme = value;
                       });
                     },
                     buttonStyleData: const ButtonStyleData(

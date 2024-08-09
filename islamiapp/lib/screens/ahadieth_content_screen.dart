@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:islamiapp/Themes/mythemedata.dart';
+import 'package:islamiapp/providers/app_config_provider.dart';
 import 'package:islamiapp/reusable_widgets/helper_methods_and_attributes.dart';
+import 'package:islamiapp/screens/settings_tab_screen.dart';
+import 'package:provider/provider.dart';
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HadiethContentScreen extends StatefulWidget {
@@ -19,8 +22,11 @@ class HadiethContentScreen extends StatefulWidget {
 class _HadiethContentScreen extends State<HadiethContentScreen> {
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<AppConfigProvider>(context);
+    SettingsTabScreen.setBackgoroundImage(provider);
+
     return Stack(children: <Widget>[
-     MyThemeData.appbackgroundimage,
+      MyThemeData.appbackgroundimage,
       Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(

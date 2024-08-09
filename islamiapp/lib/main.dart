@@ -8,6 +8,7 @@ import 'package:islamiapp/screens/sebhaa_tab_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:islamiapp/screens/settings_tab_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(
@@ -25,6 +26,32 @@ class MyApp extends StatelessWidget {
     //make a provider object of my language provider
     var provider = Provider.of<AppConfigProvider>(context);
 
+    //get provider last saved states
+    () async {
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+
+      //get provider last saved states for language
+      if (sharedPreferences.getString("lastUsedProviderlanguage") != null) {
+        provider.changeLanguage(
+            sharedPreferences.getString("lastUsedProviderlanguage")!);
+
+        SettingsTabScreen.choosenlanguage =
+            sharedPreferences.getString("lastChoosenlanguage");
+      }
+
+      //get provider last saved states for themes
+
+      if (sharedPreferences.getBool("lastUsedthememode") == false) {
+        provider.thememode = ThemeMode.dark;
+        SettingsTabScreen.choosenTheme =
+            sharedPreferences.getString("lastChoosenTheme");
+      } else if (sharedPreferences.getBool("lastUsedthememode") == true) {
+        provider.thememode = ThemeMode.light;
+        SettingsTabScreen.choosenTheme =
+            sharedPreferences.getString("lastChoosenTheme");
+      }
+    }();
 
     return MaterialApp(
       title: 'IslamiApp',

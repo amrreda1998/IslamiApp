@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:islamiapp/screens/settings_tab_screen.dart';
+
 
 class MyThemeData {
   static final ThemeData light_theme = ThemeData(
@@ -83,14 +83,5 @@ class MyThemeData {
 
   //background image for the entire app
   static Image appbackgroundimage =
-      Image.asset("assets/images/background_image.png");
-  setBackgoroundImage() {
-    if (SettingsTabScreen.choosenTheme == "Light Theme" ||
-        SettingsTabScreen.choosenTheme == "الوضع النهارى") {
-          appbackgroundimage = Image.asset("assets/images/background_image.png");
-    } else if (SettingsTabScreen.choosenTheme == "Dark Theme" ||
-        SettingsTabScreen.choosenTheme == "الوضع الليلى") {
-          appbackgroundimage = Image.asset("assets/images/background_image_dark.png");
-        }
-  }
+      Image.asset("assets/images/background_image.png"); 
 }
