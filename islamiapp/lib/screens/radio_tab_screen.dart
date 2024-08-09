@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:islamiapp/Themes/mythemedata.dart';
+import 'package:islamiapp/providers/app_config_provider.dart';
 import 'package:islamiapp/reusable_widgets/helper_methods_and_attributes.dart';
 // import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:islamiapp/screens/settings_tab_screen.dart';
+import 'package:provider/provider.dart';
 
 class RadioTabScreen extends StatefulWidget {
   const RadioTabScreen({super.key});
@@ -48,6 +51,9 @@ class _RadioTabScreenState extends State<RadioTabScreen> {
 
   @override
   Widget build(BuildContext context) {
+            var provider = Provider.of<AppConfigProvider>(context);
+    SettingsTabScreen.setBackgoroundImage(provider);
+    
     return Stack(
       children: <Widget>[
         MyThemeData.appbackgroundimage,

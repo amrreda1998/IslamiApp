@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:islamiapp/Themes/mythemedata.dart';
+import 'package:islamiapp/providers/app_config_provider.dart';
 import 'package:islamiapp/reusable_widgets/helper_methods_and_attributes.dart';
 import 'package:islamiapp/screens/ahadieth_content_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:islamiapp/screens/settings_tab_screen.dart';
+import 'package:provider/provider.dart';
 
 class AhadiethTabScreen extends StatefulWidget {
   const AhadiethTabScreen({super.key});
@@ -24,6 +27,9 @@ class _AhadiethTabScreenState extends State<AhadiethTabScreen> {
     //read all ahadieth from the file then put them in this list
     HelperMethodsAndAttributes.getListOfhadieth(
         "assets/ahadeith_content/ahadeth.txt");
+
+    var provider = Provider.of<AppConfigProvider>(context);
+    SettingsTabScreen.setBackgoroundImage(provider);
 
     return Stack(
       children: <Widget>[

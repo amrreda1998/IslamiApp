@@ -4,6 +4,10 @@ import 'package:islamiapp/Themes/mythemedata.dart';
 import 'package:islamiapp/reusable_widgets/helper_methods_and_attributes.dart';
 import 'package:islamiapp/screens/quran_sura_content_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:islamiapp/screens/settings_tab_screen.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/app_config_provider.dart';
 
 class QuranTabScreen extends StatefulWidget {
   const QuranTabScreen({super.key});
@@ -252,6 +256,9 @@ class _QuranTabScreenState extends State<QuranTabScreen> {
   int selectedItemIndex = 0;
   @override
   Widget build(BuildContext context) {
+            var provider = Provider.of<AppConfigProvider>(context);
+    SettingsTabScreen.setBackgoroundImage(provider);
+    
     return Stack(
       children: <Widget>[
         MyThemeData.appbackgroundimage,
